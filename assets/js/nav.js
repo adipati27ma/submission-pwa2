@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Load page content
   let page = window.location.hash.substr(1);
-  if (page == "") page = "home";
+  if (page == "") page = "fifa";
   loadPage(page);
 
   function loadPage(page) {
@@ -45,11 +45,29 @@ document.addEventListener("DOMContentLoaded", function () {
       if (this.readyState == 4) {
         let content = document.querySelector("#body-content");
 
-        if (page === "home") {
-          getTeams();
-        } else if (page === "saved") {
-          getSavedTeams();
+
+        switch (page) {
+          case "fifa":
+            getTeams(2000);
+            break;
+
+          case "uefa":
+            getTeams(2001);
+            break;
+
+          case "premier":
+            getTeams(2021);
+            break;
+
+          case "saved":
+            getSavedTeams();
+            break;
+
+          default:
+            getTeams(2000);
+            break;
         }
+
 
         if (this.status == 200) {
           content.innerHTML = xhttp.responseText;
@@ -60,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     };
-    xhttp.open("GET", "pages/" + page + ".html", true);
+    xhttp.open("GET", "pages/home.html", true);
     xhttp.send();
   }
 });
