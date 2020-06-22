@@ -1,0 +1,33 @@
+.card-wrapper {
+  padding: 0 3px;
+}
+
+.card {
+  /* width: 100%; */
+  height: 300px;
+}
+
+.card .card-image img {
+  margin-top: 5px;
+  height: 12rem;
+}
+
+.card .card-content {
+  padding: 0;
+  height: 50px;
+}
+
+.card .card-action {
+  padding: auto 0px;
+  position: relative;
+}
+
+.card-wrapper .card span.personnel {
+  position: absolute;
+  left: 0;
+}
+
+.card-wrapper .card span.nation {
+  position: absolute;
+  right: 0;
+}

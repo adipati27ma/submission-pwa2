@@ -1,22 +1,35 @@
-const CACHE_NAME = "FBP-caches-v0.1";
-var urlsToCache = [
+const CACHE_NAME = "FBP-caches-v0.4";
+let urlsToCache = [
   "/",
   "/manifest.json",
   "/register-sw.js",
   "/fball-logo.ico",
+  "/nav.html",
   "/index.html",
-  "/assets/css/materialize.min.css",
-  "/assets/css/style.css",
-  "/assets/js/materialize.min.js",
-  "/assets/img/icons/soccerball.png",
-  "/assets/img/icons/icon-72x72.png",
-  "/assets/img/icons/icon-96x96.png",
-  "/assets/img/icons/icon-128x128.png",
-  "/assets/img/icons/icon-144x144.png",
-  "/assets/img/icons/icon-152x152.png",
-  "/assets/img/icons/icon-192x192.png",
-  "/assets/img/icons/icon-384x384.png",
-  "/assets/img/icons/icon-512x512.png"
+  "/team.html",
+  "/pages/home.html",
+  "/pages/about.html",
+  "/pages/contact.html",
+  "assets/css/materialize.min.css",
+  "assets/css/style.css",
+  "assets/css/material-icons.css",
+  "assets/js/materialize.min.js",
+  "assets/js/api.js",
+  "assets/js/db.js",
+  "assets/js/idb.js",
+  "assets/js/nav.js",
+  "assets/fonts/MaterialIcons-Regular.woff2",
+  "assets/fonts/MaterialIcons-Regular.woff",
+  "assets/fonts/MaterialIcons-Regular.ttf",
+  "assets/fonts/MaterialIcons-Regular.eot",
+  "assets/images/icons/icon-72x72.png",
+  "assets/images/icons/icon-96x96.png",
+  "assets/images/icons/icon-128x128.png",
+  "assets/images/icons/icon-144x144.png",
+  "assets/images/icons/icon-152x152.png",
+  "assets/images/icons/icon-192x192.png",
+  "assets/images/icons/icon-384x384.png",
+  "assets/images/icons/icon-512x512.png"
 ];
 
 self.addEventListener("install", function (event) {
@@ -29,7 +42,7 @@ self.addEventListener("install", function (event) {
 
 // untuk merunning service worker (saat ada permintaan)
 self.addEventListener("fetch", function (event) {
-  var base_url = "https://readerapi.codepolitan.com/";
+  let base_url = "http://api.football-data.org/v2/";
   if (event.request.url.indexOf(base_url) > -1) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function (cache) {

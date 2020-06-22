@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Team Detail</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="My PWA">
+  <link rel="shortcut icon" href="fball-logo.ico">
+  <link rel="apple-touch-icon" href="/assets/images/icons/icon-152x152.png">
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ef5350">
+
+  <meta name="description" content="My first Progressive Web Application">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="assets/css/material-icons.css">
+  <link rel="stylesheet" href="assets/css/materialize.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <!-- Navigasi -->
+  <div class="navbar-fixed">
+    <nav class="red lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="#home" class="brand-logo" id="logo-container">F.B-Playerz</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="./index.html">
+              <i class="material-icons">close</i>
+            </a>
+          </li>
+        </ul>
+        <ul id="nav-mobile" class="left hide-on-large-only">
+          <li>
+            <a href="./index.html">
+              <i class="material-icons">close</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- Akhir Navigasi -->
+
+
+  <div class="container" id="body-content">
+
+
+
+  </div>
+
+
+
+  <!-- tombol save -->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" id="save">
+      <i class="large material-icons">save</i>
+    </a>
+  </div>
+
+
+
+
+
+  <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
+  <script src="/assets/js/materialize.min.js"></script>
+  <script src="/assets/js/api.js"></script>
+
+  <script src="register-sw.js"></script>
+  <script src="/assets/js/idb.js"></script>
+  <script src="/assets/js/db.js"></script>
+  <script src="/assets/js/for-teams.js"></script>
+
+</body>
+
+</html>
