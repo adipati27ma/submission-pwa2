@@ -70,7 +70,7 @@ function getTeams(teamId) {
           document.getElementById("teams").innerHTML = teamsHTML;
         })
       }
-    })
+    }).catch(error);
   }
 
 
@@ -136,15 +136,16 @@ function getTeamById() {
 
     if ('caches' in window) {
       caches.match(base_url + "teams/" + idParam).then(function (response) {
-        if (response) {
-          response.json().then(function (data) {
-            changeTeamData(data);
+          if (response) {
+            response.json().then(function (data) {
+              changeTeamData(data);
 
-            showSquadMember(data);
-            resolve(data);
-          });
-        }
-      });
+              showSquadMember(data);
+              resolve(data);
+            });
+          }
+        })
+        .catch(error);
     }
 
 
@@ -160,7 +161,8 @@ function getTeamById() {
 
         showSquadMember(data);
         resolve(data);
-      });
+      })
+      .catch(error);
   });
 }
 
