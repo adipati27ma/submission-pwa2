@@ -27,7 +27,7 @@
   <div class="navbar-fixed">
     <nav class="red lighten-1" role="navigation">
       <div class="nav-wrapper container">
-        <a href="#home" class="brand-logo" id="logo-container">F.B-Playerz</a>
+        <a href="#" class="brand-logo" id="logo-container">F.B-Playerz</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
             <a href="./index.html">
@@ -50,10 +50,15 @@
 
   <div class="container" id="body-content">
 
-    <div class="last-updated">
-      <p>last updated : <b><span></span></b></p>
+    <div class="row last-updated">
+      <div class="col s6">
+        <p>last updated : <b><span></span></b></p>
+      </div>
+      <div class="col s6">
+        <p><b><span class="new badge red" data-badge-caption="Spain"></span></b></p>
+      </div>
+
     </div>
-    <img src="/assets/images/soccerball.jpg" alt="soccer ball" title="soccer ball" class="responsive-img soccer-image">
 
     <div class="row">
       <div class="col s4 club-logo-wrapper">
@@ -67,20 +72,20 @@
         <div class="row">
           <div class="col s12">
             <div class="row">
-              <div class="col s5"><i class="material-icons">language</i></div>
-              <div id="team-website" class="col s7">
+              <div class="col s3"><i class="material-icons">language</i></div>
+              <div id="team-website" class="col s9">
                 <p>loading...</p>
               </div>
             </div>
             <div class="row">
-              <div class="col s5"><i class="material-icons">invert_colors</i></div>
-              <div id="team-color" class="col s7">
+              <div class="col s3"><i class="material-icons">invert_colors</i></div>
+              <div id="team-color" class="col s9">
                 <p>loading...</p>
               </div>
             </div>
             <div class="row">
-              <div class="col s5"><i class="material-icons">location_on</i></div>
-              <div id="team-venue" class="col s7">
+              <div class="col s3"><i class="material-icons">location_on</i></div>
+              <div id="team-venue" class="col s9">
                 <p>loading...</p>
               </div>
             </div>
@@ -105,7 +110,7 @@
 
   <!-- tombol save -->
   <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red" id="save">
+    <a class="btn-floating btn-large red" id="save-button">
       <i class="large material-icons">favorite_border</i>
     </a>
   </div>
@@ -114,7 +119,6 @@
 
 
 
-  <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
   <script src="/assets/js/materialize.min.js"></script>
   <script src="/assets/js/api.js"></script>
 
@@ -122,6 +126,7 @@
   <script src="/assets/js/idb.js"></script>
   <script src="/assets/js/db.js"></script>
   <script src="/assets/js/for-teams.js"></script>
+  <script src="/assets/sweetalert2/sweetalert2.all.min.js"></script>
 
 </body>
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "FBP-caches-v0.5";
+const CACHE_NAME = "FBP-caches-v0.7.2";
 let urlsToCache = [
   "/",
   "/manifest.json",
@@ -16,6 +16,8 @@ let urlsToCache = [
   "/assets/js/db.js",
   "/assets/js/idb.js",
   "/assets/js/nav.js",
+  "/assets/js/for-teams.js",
+  "/assets/js/for-index.js",
   "/assets/fonts/MaterialIcons-Regular.woff2",
   "/assets/fonts/MaterialIcons-Regular.woff",
   "/assets/fonts/MaterialIcons-Regular.ttf",
@@ -31,7 +33,10 @@ let urlsToCache = [
   "/assets/images/2000.jpg",
   "/assets/images/2001.jpg",
   "/assets/images/2021.jpg",
-  "/assets/images/soccerball.jpg"
+  "/assets/images/soccerball.jpg",
+  "/assets/sweetalert2/sweetalert2.all.min.js",
+  "/assets/sweetalert2/sweetalert2.min.js",
+  "/assets/sweetalert2/sweetalert2.min.css"
 ];
 
 self.addEventListener("install", function (event) {
@@ -44,7 +49,7 @@ self.addEventListener("install", function (event) {
 
 // untuk merunning service worker (saat ada permintaan)
 self.addEventListener("fetch", function (event) {
-  let base_url = "http://api.football-data.org/v2/";
+  let base_url = "https://api.football-data.org/v2/";
   if (event.request.url.indexOf(base_url) > -1) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function (cache) {

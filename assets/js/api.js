@@ -1,4 +1,4 @@
-let base_url = "http://api.football-data.org/v2/";
+let base_url = "https://api.football-data.org/v2/";
 const authToken = "0292f6cbac12476aadc969faec2ae5c6";
 
 // Blok kode yang akan di panggil jika fetch berhasil
@@ -21,6 +21,16 @@ function error(error) {
   // Parameter error berasal dari Promise.reject()
   console.log("Error : " + error);
   alert(error);
+}
+
+//cache all team list
+function cacheCompetition(id) {
+  fetch(`${base_url}competitions/${id}/teams`, {
+      headers: {
+        "X-Auth-Token": authToken
+      }
+    })
+    .then(status);
 }
 
 // Blok kode untuk melakukan request data json
@@ -70,7 +80,7 @@ function getTeams(teamId) {
           document.getElementById("teams").innerHTML = teamsHTML;
         })
       }
-    }).catch(error);
+    });
   }
 
 
@@ -121,8 +131,7 @@ function getTeams(teamId) {
       });
       // Sisipkan komponen card ke dalam elemen dengan id #content
       document.getElementById("teams").innerHTML = teamsHTML;
-    })
-    .catch(error);
+    });
 }
 
 
@@ -162,67 +171,78 @@ function getTeamById() {
         showSquadMember(data);
         resolve(data);
       })
-      .catch(error);
+      .catch(err => {
+        return reject(err);
+      });
   });
 }
 
 
 function getSavedTeams() {
   getAll().then(function (teams) {
-    console.log(teams);
     // Menyusun komponen card artikel secara dinamis
     let teamsHTML = "";
 
-    teams.forEach(function (team) {
-      let nation = team.area.name;
+    const titleEl = document.querySelector('h2.league-name');
+    const imgEl = document.querySelector('img.league-img');
+    const endDateEl = document.querySelector('.end-date>p');
 
-      if (nation === "Czech Republic") {
-        nation = "Czech";
-      }
-      teamsHTML += `
-        <div class = "col s6 m4 l3 card">
-          <a href="./team.html?id=${team.ID}&saved=true">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img src="${team.crestUrl}" />
+    const title = "Favorited Team(s)";
+    const imgSrc = "/assets/images/favorite-soccer.jpg";
+
+    titleEl.innerText = title;
+    imgEl.setAttribute('src', imgSrc);
+    endDateEl.style.display = 'none';
+
+    if (teams.length === 0) {
+      document.getElementById("teams").innerHTML = '<h5 class="center">There are no favorite teams.</h5>';
+    } else {
+      teams.forEach(function (team) {
+        let src = team.crestUrl;
+        let nation = team.area.name;
+
+        if (nation === "Czech Republic") {
+          nation = "Czech";
+        }
+
+        teamsHTML += `
+        <div div div class = "col s6 m4 l3 card-wrapper">
+          <div class="card">
+            <a href="./team.html?id=${team.id}&saved=true">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
+              </div>
+            </a>
+            <div class="card-content center-align">
+              <span class="card-title">${team.shortName}</span>
             </div>
-          </a>
-          <div class="card-content center-align">
-            <span class="card-title">${team.name}</span>
-          </div>
-          <div class="card-action row">
-            <span class="col s6 left-align">${team.founded}</span>
-            <span class="col s6 right-align">${nation}</span>
+            <div class="card-action">
+              <span class="col s6 left-align founded">${team.founded}</span>
+              <span class="col s6 right-align nation">${nation}</span>
+            </div>
           </div>
         </div>
-      `;
-    });
-    // Sisipkan card ke #body-content
-    document.getElementById("body-content").innerHTML = teamsHTML;
+        `;
+      });
+      // Sisipkan card ke #body-content
+      document.getElementById("teams").innerHTML = teamsHTML;
+    }
   });
 }
 
 function getSavedTeamById() {
   let urlParams = new URLSearchParams(window.location.search);
-  let idParam = urlParams.get("id");
+  let idParam = Number(urlParams.get("id"));
 
   getById(idParam).then(function (team) {
-    let teamHTML = `
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img src="${team.cover}" />
-        </div>
-        <div class="card-content">
-          <span class="card-title">${team.post_title}</span>
-          ${snarkdown(team.post_content)}
-        </div>
-      </div>
-    `;
-    // Sisipkan komponen card ke dalam elemen dengan id #content
-    document.getElementById("body-content").innerHTML = teamHTML;
+    console.log(team);
+    changeTeamData(team);
+    showSquadMember(team);
   });
+  return idParam;
 }
 
-
+// Fungsi-fungsi API
 function changeLeague(data) {
   const endDate = new Date(data.season.endDate).toDateString();
   const leagueName = data.competition.name;
@@ -241,6 +261,7 @@ function changeLeague(data) {
 
 function changeTeamData(data) {
   const teamLastUpdated = new Date(data.lastUpdated).toDateString();
+  const teamNation = data.area.name;
   const teamName = data.name;
   const teamCrestSrc = data.crestUrl;
   const teamFounded = data.founded;
@@ -250,6 +271,7 @@ function changeTeamData(data) {
   const clubNameSince = `${teamName}<sup>since ${teamFounded}</sup>`;
 
   const teamLastUpdatedEl = document.querySelector('.last-updated span');
+  const teamNationEl = document.querySelector('.last-updated span.new.badge');
   const teamNameEl = document.querySelector('h4.team-name');
   const teamLogoEl = document.querySelector('img.club-logo');
   const teamWebsiteEl = document.querySelector('#team-website');
@@ -261,6 +283,7 @@ function changeTeamData(data) {
   }
 
   teamLastUpdatedEl.innerText = teamLastUpdated;
+  teamNationEl.setAttribute('data-badge-caption', teamNation);
   teamNameEl.innerHTML = clubNameSince;
   teamLogoEl.setAttribute('src', teamCrestSrc);
   teamLogoEl.setAttribute('alt', teamName);

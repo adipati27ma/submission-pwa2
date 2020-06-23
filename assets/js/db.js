@@ -1,54 +1,79 @@
 // membuat database dan object store
-var dbPromised = idb.open("news-reader", 1, function (upgradeDb) {
-  var articlesObjectStore = upgradeDb.createObjectStore("articles", {
-    keyPath: "ID"
+let dbPromised = idb.open("footbal-playerz", 1, function (upgradeDb) {
+  let teamsObjectStore = upgradeDb.createObjectStore("teams", {
+    keyPath: "id"
   });
-  articlesObjectStore.createIndex("post_title", "post_title", {
+  teamsObjectStore.createIndex("shortName", "shortName", {
     unique: false
   });
 });
 
 // function save for later
-function saveForLater(article) {
+function saveForLater(team) {
   dbPromised
     .then(function (db) {
-      var tx = db.transaction("articles", "readwrite");
-      var store = tx.objectStore("articles");
-      console.log(article);
-      store.add(article.result);
+      let tx = db.transaction("teams", "readwrite");
+      let store = tx.objectStore("teams");
+      console.log(team);
+      store.add(team);
       return tx.complete;
     })
     .then(function () {
-      console.log("Artikel berhasil di simpan.");
-    });
+      console.log("Team berhasil disimpan.");
+      M.toast({
+        html: `Added to favorite.`
+      });
+    })
+    .catch(error => console.log(error));
 }
 
-// mengambil semua saved article
+// mengambil semua saved team
 function getAll() {
   return new Promise(function (resolve, reject) {
     dbPromised
       .then(function (db) {
-        let tx = db.transaction("articles", "readonly");
-        let store = tx.objectStore("articles");
+        let tx = db.transaction("teams", "readonly");
+        let store = tx.objectStore("teams");
         return store.getAll();
       })
-      .then(function (articles) {
-        resolve(articles);
+      .then(function (teams) {
+        resolve(teams);
       });
   });
 }
 
-// mengambil detail saved article
+// mengambil detail saved team
 function getById(id) {
   return new Promise(function (resolve, reject) {
     dbPromised
       .then(function (db) {
-        var tx = db.transaction("articles", "readonly");
-        var store = tx.objectStore("articles");
+        let tx = db.transaction("teams", "readonly");
+        let store = tx.objectStore("teams");
         return store.get(id);
       })
-      .then(function (article) {
-        resolve(article);
-      });
+      .then(function (team) {
+        resolve(team);
+      })
+      .catch(error => {
+        reject(error);
+      })
   });
+}
+
+// function delete team
+function deleteFavTeam(team) {
+  dbPromised
+    .then(function (db) {
+      let tx = db.transaction("teams", "readwrite");
+      let store = tx.objectStore("teams");
+      store.delete(team);
+      return tx.complete;
+    })
+    .then(function () {
+      console.log("Team berhasil dihapus.");
+      M.toast({
+        html: `Removed from favorite.`
+      });
+    })
+    .catch(error => console.log(error));
 }

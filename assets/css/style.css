@@ -59,12 +59,6 @@
   margin-bottom: 30px;
 }
 
-.soccer-image {
-  width: 100% !important;
-  height: 450px !important;
-}
-
-
 
 
 
@@ -95,4 +89,29 @@ h4.team-name sup {
 #team-color,
 #team-venue {
   text-align: right;
+}
+
+#save-button>i {
+  color: #f44336;
+  background-color: white;
+  font-size: 2.2em;
+}
+
+#save-button:hover>i {
+  color: #f76e64;
+  background-color: rgb(241, 241, 241);
+}
+
+@media only screen and (max-width: 768px) {
+  h4.team-name sup {
+    top: 40px;
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h4.team-name sup {
+    top: -5px;
+    left: 0;
+  }
 }

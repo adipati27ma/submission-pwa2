@@ -74,11 +74,17 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (this.status == 404) {
           content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
         } else {
-          content.innerHTML = "<p>Ups.. halaman tidak dapat diakses.</p>";
+          content.innerHTML = "<p>Oops ... the page cannot be accessed.<br>Please check your connection.</p>";
+          M.toast({
+            html: `Can't connect to network or API request limit reached.`
+          });
         }
       }
     };
     xhttp.open("GET", "pages/home.html", true);
     xhttp.send();
   }
+
+  cacheCompetition(2001);
+  cacheCompetition(2021);
 });
