@@ -1,6 +1,14 @@
 let base_url = "https://api.football-data.org/v2/";
 const authToken = "0292f6cbac12476aadc969faec2ae5c6";
 
+// fetch Competition API
+const fetchApi = (base_url, id) => {
+  return fetch(`${base_url}competitions/${id}/teams`, {
+    headers: {
+      'X-Auth-Token': authToken
+    }
+  });
+};
 // Blok kode yang akan di panggil jika fetch berhasil
 function status(response) {
   if (response.status !== 200) {
@@ -25,11 +33,7 @@ function error(error) {
 
 //cache all team list
 function cacheCompetition(id) {
-  fetch(`${base_url}competitions/${id}/teams`, {
-      headers: {
-        "X-Auth-Token": authToken
-      }
-    })
+  fetchApi(base_url, id)
     .then(status);
 }
 
@@ -43,40 +47,15 @@ function getTeams(teamId) {
           let teamsHTML = "";
           changeLeague(data);
 
-          data.teams.forEach(function (team) {
-
+          data.teams.forEach(team => {
             if (team.crestUrl !== null && team.crestUrl !== "") {
-              let src = team.crestUrl;
-              let nation = team.area.name;
-
-              // memperpendek nama negara ceko
-              if (nation === "Czech Republic") {
-                nation = "Czech";
-              }
-
-              teamsHTML += `
-                <div class = "col s6 m4 l3 card-wrapper">
-                  <div class="card">
-                    <a href="./team.html?id=${team.id}">
-                      <div class="card-image waves-effect waves-block waves-light">
-                        <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
-                      </div>
-                    </a>
-                    <div class="card-content center-align">
-                      <span class="card-title">${team.shortName}</span>
-                    </div>
-                    <div class="card-action row">
-                      <span class="col s6 left-align founded">${team.founded}</span>
-                      <span class="col s6 right-align nation">${nation}</span>
-                    </div>
-                  </div>
-                </div>
-                `;
+              teamsHTML += inputCards(team);
             } else {
               console.log(`${team.name} tak memiliki link logo`);
             }
           });
-          // Sisipkan komponen card ke dalam elemen dengan id #content
+
+          // Sisipkan komponen card ke dalam elemen dengan id #teams
           document.getElementById("teams").innerHTML = teamsHTML;
         })
       }
@@ -84,11 +63,7 @@ function getTeams(teamId) {
   }
 
 
-  fetch(`${base_url}competitions/${teamId}/teams`, {
-      headers: {
-        "X-Auth-Token": authToken
-      }
-    })
+  fetchApi(base_url, teamId)
     .then(status)
     .then(json)
     .then(function (data) {
@@ -96,39 +71,14 @@ function getTeams(teamId) {
       let teamsHTML = "";
       changeLeague(data);
 
-      data.teams.forEach(function (team) {
-
+      data.teams.forEach(team => {
         if (team.crestUrl !== null && team.crestUrl !== "") {
-          let src = team.crestUrl;
-          let nation = team.area.name;
-
-          // memperpendek nama negara ceko
-          if (nation === "Czech Republic") {
-            nation = "Czech";
-          }
-
-          teamsHTML += `
-                <div div div class = "col s6 m4 l3 card-wrapper">
-                  <div class="card">
-                    <a href="./team.html?id=${team.id}">
-                      <div class="card-image waves-effect waves-block waves-light">
-                        <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
-                      </div>
-                    </a>
-                    <div class="card-content center-align">
-                      <span class="card-title">${team.shortName}</span>
-                    </div>
-                    <div class="card-action">
-                      <span class="col s6 left-align founded">${team.founded}</span>
-                      <span class="col s6 right-align nation">${nation}</span>
-                    </div>
-                  </div>
-                </div>
-                `;
+          teamsHTML += inputCards(team);
         } else {
           console.log(`${team.name} tak memiliki link logo`);
         }
       });
+
       // Sisipkan komponen card ke dalam elemen dengan id #content
       document.getElementById("teams").innerHTML = teamsHTML;
     });
@@ -206,7 +156,7 @@ function getSavedTeams() {
         }
 
         teamsHTML += `
-        <div div div class = "col s6 m4 l3 card-wrapper">
+        <div class="col s12 m4 l3 card-wrapper">
           <div class="card">
             <a href="./team.html?id=${team.id}&saved=true">
               <div class="card-image waves-effect waves-block waves-light">
@@ -216,7 +166,7 @@ function getSavedTeams() {
             <div class="card-content center-align">
               <span class="card-title">${team.shortName}</span>
             </div>
-            <div class="card-action">
+            <div class="card-action row">
               <span class="col s6 left-align founded">${team.founded}</span>
               <span class="col s6 right-align nation">${nation}</span>
             </div>
@@ -322,4 +272,36 @@ function showSquadMember(data) {
   });
 
   document.getElementById("squad-member").innerHTML = squadHTML;
+}
+
+function inputCards(team) {
+  let card;
+  let src = team.crestUrl;
+  let nation = team.area.name;
+
+  // memperpendek nama negara ceko
+  if (nation === "Czech Republic") {
+    nation = "Czech";
+  }
+
+  card = `
+        <div class="col s12 m4 l3 card-wrapper">
+          <div class="card">
+            <a href="./team.html?id=${team.id}">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
+              </div>
+            </a>
+            <div class="card-content center-align">
+              <span class="card-title">${team.shortName}</span>
+            </div>
+            <div class="card-action">
+              <span class="col s6 left-align founded">${team.founded}</span>
+              <span class="col s6 right-align nation">${nation}</span>
+            </div>
+          </div>
+        </div>
+        `;
+
+  return card;
 }

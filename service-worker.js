@@ -1,4 +1,4 @@
-const CACHE_NAME = "FBP-caches-v0.7.2";
+const CACHE_NAME = "FBP-caches-v1";
 let urlsToCache = [
   "/",
   "/manifest.json",
@@ -34,6 +34,7 @@ let urlsToCache = [
   "/assets/images/2001.jpg",
   "/assets/images/2021.jpg",
   "/assets/images/soccerball.jpg",
+  "/assets/images/favorite-soccer.jpg",
   "/assets/sweetalert2/sweetalert2.all.min.js",
   "/assets/sweetalert2/sweetalert2.min.js",
   "/assets/sweetalert2/sweetalert2.min.css"
