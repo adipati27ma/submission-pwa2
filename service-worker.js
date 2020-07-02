@@ -1,5 +1,5 @@
 const CACHE_NAME = "FBP-caches-v1";
-let urlsToCache = [
+const urlsToCache = [
   "/",
   "/manifest.json",
   "/register-sw.js",
@@ -11,6 +11,7 @@ let urlsToCache = [
   "/assets/css/materialize.min.css",
   "/assets/css/style.css",
   "/assets/css/material-icons.css",
+  "/assets/css/preloader.css",
   "/assets/js/materialize.min.js",
   "/assets/js/api.js",
   "/assets/js/db.js",
@@ -18,6 +19,8 @@ let urlsToCache = [
   "/assets/js/nav.js",
   "/assets/js/for-teams.js",
   "/assets/js/for-index.js",
+  "/assets/js/jquery-3.4.1.min.js",
+  "/assets/js/preloader.js",
   "/assets/fonts/MaterialIcons-Regular.woff2",
   "/assets/fonts/MaterialIcons-Regular.woff",
   "/assets/fonts/MaterialIcons-Regular.ttf",

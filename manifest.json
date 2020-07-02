@@ -1,6 +1,6 @@
 {
   "name": "FootBall-Playerz",
-  "short_name": "FootBall-Playerz",
+  "short_name": "FB-Playerz",
   "description": "FootBall-Playerz is a small app for see the football player in the world.",
   "start_url": "/index.html",
   "display": "standalone",

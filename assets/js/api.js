@@ -160,7 +160,8 @@ function getSavedTeams() {
           <div class="card">
             <a href="./team.html?id=${team.id}&saved=true">
               <div class="card-image waves-effect waves-block waves-light">
-                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
+                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img" 
+                alt="${team.shortName}" title="${team.shortName}"/>
               </div>
             </a>
             <div class="card-content center-align">
@@ -289,7 +290,8 @@ function inputCards(team) {
           <div class="card">
             <a href="./team.html?id=${team.id}">
               <div class="card-image waves-effect waves-block waves-light">
-                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img"/>
+                <img src="${src.replace(/^http:\/\//i, 'https://')}" class="responsive-img" 
+                alt="${team.shortName}" title="${team.shortName}"/>
               </div>
             </a>
             <div class="card-content center-align">
