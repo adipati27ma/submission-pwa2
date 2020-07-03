@@ -167,7 +167,7 @@ function getSavedTeams() {
             <div class="card-content center-align">
               <span class="card-title">${team.shortName}</span>
             </div>
-            <div class="card-action row">
+            <div class="card-action">
               <span class="col s6 left-align founded">${team.founded}</span>
               <span class="col s6 right-align nation">${nation}</span>
             </div>
