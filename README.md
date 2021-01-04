@@ -1,5 +1,5 @@
-# submission-pwa2
-PWA App Footbal-Playerz builds with Materialize, implement IndexedDB and Push Notif Payload using FCM/GCM. Also use API from footbal-data.org
+# Football-Playerz App
+Progressive Web Application builds with Materialize, implement IndexedDB and Push Notif Payload using FCM/GCM. Also use API from footbal-data.org
 
 Download the source code & open *index.html* to run the application
 
