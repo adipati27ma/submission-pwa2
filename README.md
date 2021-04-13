@@ -3,5 +3,5 @@ Progressive Web Application builds with Materialize, implement IndexedDB and Pus
 <br/>Also use API from [footbal-data.org](https://www.football-data.org/documentation/quickstart)
 
 Download the source code & open *index.html* to run the application<br/>
-or<br/>
+or you can<br/>
 Go to *[submission-pwa2.netlify.app](https://submission-pwa2.netlify.app/)* website
