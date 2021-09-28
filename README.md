@@ -1,5 +1,5 @@
 # Football-Playerz App
-Progressive Web Application builds with Materialize, implement IndexedDB and Push Notif Payload using FCM/GCM.
+Progressive Web Application built with Materialize, implements IndexedDB and Push Notification Payload using FCM/GCM.
 <br/>Also use API from [footbal-data.org](https://www.football-data.org/documentation/quickstart)
 
 Download the source code & open *index.html* to run the application<br/>
