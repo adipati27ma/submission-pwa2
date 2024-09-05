@@ -5,3 +5,5 @@ Progressive Web Application built with Materialize, implements IndexedDB and Pus
 Download the source code & open *index.html* to run the application<br/>
 or you can<br/>
 Go to *[submission-pwa2.netlify.app](https://submission-pwa2.netlify.app/)* website
+
+Continued to this repo : [submission-pwa3 repository](https://github.com/adipati27ma/submission-pwa3)
